@@ -52,7 +52,7 @@ class _EatingState extends State<Eating> {
         children: <Widget>[
           Padding(
             child: Text(
-              "I eat Non Veg".tr().toString(),
+              "I eat non-veg".tr().toString(),
               style: TextStyle(fontSize: 40),
             ),
             padding: EdgeInsets.only(left: 50, top: 120),
