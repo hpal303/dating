@@ -15,7 +15,7 @@ class Exercising extends StatefulWidget {
 }
 
 class _ExercisingState extends State<Exercising> {
-  bool socially = false;
+  bool sometimes = false;
   bool frequently = false;
   bool never = false;
   bool select = false;
@@ -68,22 +68,22 @@ class _ExercisingState extends State<Exercising> {
                     height: MediaQuery.of(context).size.height * .065,
                     width: MediaQuery.of(context).size.width * .75,
                     child: Center(
-                        child: Text("SOCIALLY".tr().toString(),
+                        child: Text("SOMETIMES".tr().toString(),
                             style: TextStyle(
                                 fontSize: 20,
-                                color: socially ? primaryColor : secondryColor,
+                                color: sometimes ? primaryColor : secondryColor,
                                 fontWeight: FontWeight.bold))),
                   ),
                   borderSide: BorderSide(
                       width: 1,
                       style: BorderStyle.solid,
-                      color: socially ? primaryColor : secondryColor),
+                      color: sometimes ? primaryColor : secondryColor),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25)),
                   onPressed: () {
                     setState(() {
                       frequently = false;
-                      socially = true;
+                      sometimes = true;
                       never = false;
                     });
                   },
@@ -111,7 +111,7 @@ class _ExercisingState extends State<Exercising> {
                     onPressed: () {
                       setState(() {
                         frequently = true;
-                        socially = false;
+                        sometimes = false;
                         never = false;
                       });
                       // Navigator.push(
@@ -141,7 +141,7 @@ class _ExercisingState extends State<Exercising> {
                   onPressed: () {
                     setState(() {
                       frequently = false;
-                      socially = false;
+                      sometimes = false;
                       never = true;
                     });
                     // Navigator.push(
@@ -169,7 +169,7 @@ class _ExercisingState extends State<Exercising> {
               ),
             ),
           ),
-          socially || frequently || never
+          sometimes || frequently || never
               ? Padding(
                   padding: const EdgeInsets.only(bottom: 40),
                   child: Align(
@@ -200,9 +200,9 @@ class _ExercisingState extends State<Exercising> {
                           ))),
                       onTap: () {
                         var userExercising;
-                        if (socially) {
+                        if (sometimes) {
                           userExercising = {
-                            'userExercising': "socially",
+                            'userExercising': "sometimes",
                             'showOnProfile': select
                           };
                         } else if (frequently) {
