@@ -52,7 +52,7 @@ class _DrinkingState extends State<Drinking> {
         children: <Widget>[
           Padding(
             child: Text(
-              "I am a".tr().toString(),
+              "I drink".tr().toString(),
               style: TextStyle(fontSize: 40),
             ),
             padding: EdgeInsets.only(left: 50, top: 120),

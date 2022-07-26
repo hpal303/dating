@@ -52,7 +52,7 @@ class _SmokingState extends State<Smoking> {
         children: <Widget>[
           Padding(
             child: Text(
-              "I am a".tr().toString(),
+              "I smoke".tr().toString(),
               style: TextStyle(fontSize: 40),
             ),
             padding: EdgeInsets.only(left: 50, top: 120),
