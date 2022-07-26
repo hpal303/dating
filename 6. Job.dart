@@ -5,16 +5,16 @@ import 'package:hookup4u/util/color.dart';
 import 'AllowLocation.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class company extends StatefulWidget {
+class Company extends StatefulWidget {
   final Map<String, dynamic> userData;
-  company(this.userData);
+  Company(this.userData);
 
   @override
-  _companyState createState() => _companyState();
+  _CompanyState createState() => _CompanyState();
 }
 
-class _companyState extends State<company> {
-  String company = '';
+class _CompanyState extends State<Company> {
+  String Company = '';
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _companyState extends State<company> {
                 children: <Widget>[
                   Padding(
                     child: Text(
-                      "My\nWork information".tr().toString(),
+                      "My Work".tr().toString(),
                       style: TextStyle(fontSize: 40),
                     ),
                     padding: EdgeInsets.only(left: 50, top: 120),
@@ -76,13 +76,13 @@ class _companyState extends State<company> {
                     ),
                     onChanged: (value) {
                       setState(() {
-                        company = value;
+                        Company = value;
                       });
                     },
                   ),
                 ),
               ),
-              company.length > 0
+              Company.length > 0
                   ? Padding(
                       padding: const EdgeInsets.only(bottom: 40),
                       child: Align(
@@ -114,14 +114,14 @@ class _companyState extends State<company> {
                           onTap: () {
                             widget.userData.addAll({
                               'editInfo': {
-                                'company': "$company",
-                                'userGender': widget.userData['userGender'],
+                                'Company': "$Company",
+                                'userCompany': widget.userData['userCompany'],
                                 'showOnProfile':
                                     widget.userData['showOnProfile']
                               }
                             });
                             widget.userData.remove('showOnProfile');
-                            widget.userData.remove('userGender');
+                            widget.userData.remove('userCompany');
 
                             print(widget.userData);
                             Navigator.push(
