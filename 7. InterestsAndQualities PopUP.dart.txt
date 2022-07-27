@@ -1,0 +1,195 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: '',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.amber,
+      ),
+      home: MyHomePage(title: 'Choose 6 Interests and Qualities'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  List<String> reportList = [
+    //"",
+    "Meditation",
+    "Yoga",
+    "Volunteering",
+    "Religious",
+    "Jovial",
+    "Spiritual",
+    "Social service",
+    "Vegetarian",
+    "Care",
+
+    "Nationalism",
+    "Intelligence",
+    "Cooking",
+    "Confident",
+    "Ambition",
+    "Hard working",
+    "Nice",
+    "Creative",
+    "Musician",
+
+    "Cute",
+    "Loyal",
+    "Honest",
+    "Run",
+    "Gym",
+    "Cycling",
+    "Bowling",
+    "Football",
+    "Basketball",
+
+    "Badminton",
+    "Tennis",
+    "Boxing",
+    "Swimming",
+    "Human rights",
+    "LGBTQIA+ ally",
+    "Feminism",
+    "Environmentalism",
+    "Social activism",
+
+    "Juice",
+    "Beer",
+    "Coffee",
+    "Tea",
+    "Gin",
+    "Vodka",
+    "Teetotaler",
+    "Drawing",
+    "Painting",
+
+    "Writing",
+    "Reading",
+    "Racing",
+    "Mountains",
+    "Long drives",
+    "Beaches",
+    "Clubs",
+    "Dancer",
+    "Singer",
+    "Chess",
+
+    "Movies",
+    "Theater",
+    "Netflix",
+    "Music",
+    "Guitar",
+    "Video games",
+    "Dogs",
+    "Cats",
+    "Fishes",
+    "Birds",
+  ];
+
+  List<String> selectedReportList = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            MultiSelectChip(
+              reportList,
+              onSelectionChanged: (selectedList) {
+                setState(() {
+                  selectedReportList = selectedList;
+                });
+              },
+              maxSelection: 6,
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              selectedReportList.join(" , "),
+              textScaleFactor: 1.11,
+              style: TextStyle(color: Colors.amberAccent[700]),
+            ),
+            Text(
+              selectedReportList.length.toString() + "/6 selected",
+              textScaleFactor: 1.11,
+              style: TextStyle(color: Colors.blue),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MultiSelectChip extends StatefulWidget {
+  final List<String> reportList;
+  final Function(List<String>)? onSelectionChanged;
+  final Function(List<String>)? onMaxSelected;
+  final int? maxSelection;
+
+  MultiSelectChip(this.reportList, {this.onSelectionChanged, this.onMaxSelected, this.maxSelection});
+
+  @override
+  _MultiSelectChipState createState() => _MultiSelectChipState();
+}
+
+class _MultiSelectChipState extends State<MultiSelectChip> {
+  // String selectedChoice = "";
+  List<String> selectedChoices = [];
+
+  _buildChoiceList() {
+    List<Widget> choices = [];
+
+    widget.reportList.forEach((item) {
+      choices.add(Container(
+        padding: const EdgeInsets.all(2.0),
+        child: ChoiceChip(
+          label: Text(item),
+          selected: selectedChoices.contains(item),
+          onSelected: (selected) {
+            if (selectedChoices.length == (widget.maxSelection ?? -1) && !selectedChoices.contains(item)) {
+              widget.onMaxSelected?.call(selectedChoices);
+            } else {
+              setState(() {
+                selectedChoices.contains(item) ? selectedChoices.remove(item) : selectedChoices.add(item);
+                widget.onSelectionChanged?.call(selectedChoices);
+              });
+            }
+          },
+        ),
+      ));
+    });
+
+    return choices;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      children: _buildChoiceList(),
+    );
+  }
+}
